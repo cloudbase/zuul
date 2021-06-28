@@ -290,7 +290,7 @@ class GerritConnection(BaseConnection):
         args = '--all-approvals --comments --commit-message'
         args += ' --current-patch-set --dependencies --files'
         args += ' --patch-sets --submit-records'
-        cmd = 'gerrit query --format json %s %s' % (
+        cmd = 'gerrit query --format json %s change:%s' % (
             args, query)
         out, err = self._ssh(cmd)
         if not out:
@@ -309,7 +309,7 @@ class GerritConnection(BaseConnection):
         def _query_chunk(query):
             args = '--commit-message --current-patch-set'
 
-            cmd = 'gerrit query --format json %s %s' % (
+            cmd = 'gerrit query --format json %s change:%s' % (
                 args, query)
             out, err = self._ssh(cmd)
             if not out:
